@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ska Digital Hub | Software Development Company</title>
+    <!-- Google tag (gtag.js) --> 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RFQCD4NE2X"></script> 
+    <script> 
+        window.dataLayer = window.dataLayer || []; 
+        function gtag(){dataLayer.push(arguments);} 
+        gtag('js', new Date()); 
+        gtag('config', 'G-4NW82ZLRTS'); 
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6C4DF6;
+            --secondary: #FF7BA9;
+            --accent: #4DF6C8;
+            --dark: #0F0F1A;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glow: 0 0 20px rgba(108, 77, 246, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0F0F1A, #1E1E3A);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .floating-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            opacity: 0.15;
+            filter: blur(80px);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, -30px) rotate(5deg); }
+            50% { transform: translate(-30px, 40px) rotate(-5deg); }
+            75% { transform: translate(30px, -20px) rotate(3deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 2rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glow);
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 1.5rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+        }
+
+        nav a:hover, nav a.active {
+            background: rgba(108, 77, 246, 0.2);
+            color: var(--accent);
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 5px 15px rgba(108, 77, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(108, 77, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            margin-bottom: 2rem;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .services {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .section-title i {
+            color: var(--accent);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--glow);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            background: rgba(108, 77, 246, 0.2);
+            color: var(--primary);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .projects {
+            margin-bottom: 3rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--glow);
+        }
+
+        .project-img {
+            height: 200px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(108, 77, 246, 0.7), rgba(255, 123, 169, 0.7));
+            opacity: 0.8;
+        }
+
+        .project-img i {
+            z-index: 1;
+            position: relative;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-content p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tag {
+            background: rgba(77, 246, 200, 0.2);
+            color: var(--accent);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .testimonials {
+            margin-bottom: 3rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--glass-border);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            font-size: 5rem;
+            position: absolute;
+            top: -1rem;
+            left: 1rem;
+            color: rgba(108, 77, 246, 0.2);
+            font-family: serif;
+        }
+
+        .testimonial-text {
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .author-info h4 {
+            margin-bottom: 0.2rem;
+            color: white;
+        }
+
+        .author-info p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .cta-section {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 16px;
+            padding: 4rem 2rem;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+            margin-bottom: 3rem;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .cta-section p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        footer {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            border: 1px solid var(--glass-border);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 15, 26, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow: auto;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: #333;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1010;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: var(--primary);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .calendar-container, .project-container {
+            min-height: 600px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .calendar-iframe, .project-iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 12px;
+        }
+
+        .benefit-content {
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .user-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .modal-content {
+                width: 95%;
+                padding: 1rem;
+            }
+            
+            .calendar-container, .project-container {
+                min-height: 500px;
+            }
+            
+            .calendar-iframe, .project-iframe {
+                height: 500px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .hero {
+                padding: 2rem 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .calendar-container, .project-container {
+                min-height: 400px;
+            }
+            
+            .calendar-iframe, .project-iframe {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-bg">
+        <div class="floating-element" style="width: 400px; height: 400px; top: 10%; left: 5%; animation-delay: 0s;"></div>
+        <div class="floating-element" style="width: 500px; height: 500px; top: 60%; left: 70%; animation-delay: 5s;"></div>
+        <div class="floating-element" style="width: 300px; height: 300px; top: 30%; left: 40%; animation-delay: 10s;"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-code"></i>
+                Ska Digital Hub
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#service">Services</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#benefit">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <button class="btn btn-secondary">
+                    <i class="fas fa-user"></i>
+                    Login
+                </button>
+                <button class="btn btn-primary" onclick="window.location.href='https://skadigitalhub.github.io/SkaApps'">
+                    <i class="fas fa-download"></i>
+                    Downloads
+                </button>
+            </div>
+        </header>
+
+        <section class="hero" id="about">
+            <h1>Transform Your Ideas Into Digital Reality</h1>
+            <p>We craft exceptional web and mobile applications that drive growth, enhance user experiences, and solve real-world problems with cutting-edge technology.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" id="scheduleConsultationBtn">
+                    <i class="fas fa-calendar"></i>
+                    Schedule Consultation
+                </button>
+                <button class="btn btn-secondary" onclick="window.location.href='progress.html'">
+                    <i class="fas fa-eye"></i>
+                    Track Your Work
+                 </button>
+            </div>
+        </section>
+
+        <!-- Google Calendar Modal -->
+        <div id="calendarModal" class="modal">
+            <div class="modal-content">
+                <button class="close-modal" id="closeCalendarModal">&times;</button>
+                <div class="calendar-container">
+                    <iframe src="https://calendar.app.google/nhu2Wbf1j6j6TRz18" class="calendar-iframe" title="Schedule Consultation"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Start Project Modal -->
+        <div id="projectModal" class="modal">
+            <div class="modal-content">
+                <button class="close-modal" id="closeProjectModal">&times;</button>
+                <div class="project-container">
+                    <iframe src="try.html" class="project-iframe" title="Start Your Project"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <section class="services" id="service">
+            <h2 class="section-title">
+                <i class="fas fa-cogs"></i>
+                Our Services
+            </h2>
+            <div class="services-grid">
+                <div class="service-card" id="web">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Web Development</h3>
+                    <p>Custom websites and web applications built with modern frameworks like React, Angular, and Vue.js.</p>
+                    <a href="#" class="service-link">
+                        Learn More
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="service-card" id="mobile">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Apps</h3>
+                    <p>iOS and Android applications developed with native and cross-platform technologies for maximum reach.</p>
+                    <a href="#" class="service-link">
+                        Learn More
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="service-card" id="cloud">
+                    <div class="service-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Cloud Solutions</h3>
+                    <p>Scalable cloud infrastructure and deployment solutions.</p>
+                    <a href="#" class="service-link">
+                        Learn More
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="service-card" id="database">
+                    <div class="service-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Database Design</h3>
+                    <p>Optimized database architecture and management for performance, security, and scalability.</p>
+                    <a href="#" class="service-link">
+                        Learn More
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="service-card" id="design">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>UI/UX Design</h3>
+                    <p>User-centered design that creates intuitive, engaging experiences that convert visitors into customers.</p>
+                    <a href="#" class="service-link">
+                        Learn More
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="service-card" id="security">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Security Audit</h3>
+                    <p>Comprehensive security assessments and implementations to protect your applications and data.</p>
+                    <a href="#" class="service-link">
+                        Learn More
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="projects" id="portfolio">
+            <h2 class="section-title">
+                <i class="fas fa-briefcase"></i>
+                Featured Projects
+            </h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>E-Commerce Platform</h3>
+                        <p>A full-featured online shopping platform with inventory management, payment processing, and analytics.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">React</span>
+                            <span class="project-tag">Node.js</span>
+                            <span class="project-tag">MongoDB</span>
+                        </div>
+                        <a href="#" class="project-link">
+                            View Case Study
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Church Management Software</h3>
+                    <p>Real-time data management visualization tool for membership analysis and management.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Dashboard</span>
+                            <span class="project-tag">Analytics</span>
+                            <span class="project-tag">Cloud-based</span>
+                        </div>
+                        <a href="https://skadigitalhub.github.io/votnt" class="project-link">
+                            View Case Study
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Fitness App</h3>
+                        <p>Mobile application for workout tracking, nutrition planning, and health progress monitoring.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Flutter</span>
+                            <span class="project-tag">Firebase</span>
+                            <span class="project-tag">HealthKit</span>
+                        </div>
+                        <a href="#" class="project-link">
+                            View Case Study
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials" id="testimonials">
+            <h2 class="section-title">
+                <i class="fas fa-comments"></i>
+                Client Testimonials
+            </h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Ska Digital Hub transformed our outdated database into a modern, responsive platform that has increased our conversion rate by 45%. Their team was professional, communicative, and delivered ahead of schedule.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SE</div>
+                        <div class="author-info">
+                            <h4>Rev. Saraphina Emefa</h4>
+                            <p>General Overseer,</p>
+                            <p>Glorious Royal Word Citadel</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">The mobile app developed by Ska Digital Hub has received overwhelming positive feedback from our users. The intuitive interface and flawless performance have significantly improved student engagement.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JA</div>
+                        <div class="author-info">
+                            <h4>Rev. Juanita NB Arthur</h4>
+                            <p>Principal,</p>
+                            <p>The Mandate School Of Ministry</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">We've been working with Ska Digital Hub for over years now, and they continue to impress us with their technical expertise and creative solutions. They're more than vendors; they're true partners in our growth.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">ES</div>
+                        <div class="author-info">
+                            <h4>Evans Sekyi</h4>
+                            <p>CEO,</p>
+                            <p>Adinyinaa Aluminium Service</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>Ready to Bring Your Project to Life?</h2>
+            <p>Let's discuss your ideas and how we can help you create a solution that exceeds your expectations and drives your business forward.</p>
+            <div style="display: flex; justify-content: center;">
+            <button class="btn btn-primary" id="startProjectBtn">
+                <i class="fas fa-paper-plane"></i>
+                Start Your Project Today
+            </button>
+            </div>
+        </section>
+        <h2 style="display: flex; justify-content: center;" id="benefit">Why Partner With Us?</h2>
+        <footer>
+            <div class="footer-grid">
+                    
+                <div class="footer-col">
+                    <i class="fas fa-lightbulb"></i>
+                    <div class="benefit-content">
+                        <h3>Expert Consultation</h3>
+                        <p>We provide expert guidance to refine your idea and maximize its potential.</p>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <i class="fas fa-rocket"></i>
+                    <div class="benefit-content">
+                        <h3>Fast Development</h3>
+                        <p>Efficient processes that bring your solution to market faster.</p>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <i class="fas fa-shield-alt"></i>
+                    <div class="benefit-content">
+                        <h3>Quality Assurance</h3>
+                        <p>Rigorous testing ensures your solution is reliable and scalable.</p>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <i class="fas fa-handshake"></i>
+                    <div class="benefit-content">
+                        <h3>Ongoing Support</h3>
+                        <p>We're with you every step of the way, even after launch.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+         <br><br>
+        <footer>
+            <div class="footer-grid">
+                <div class="footer-col"  id="contact">
+                    <h3>Ska Digital Hub</h3>
+                    <p>Transforming ideas into digital solutions through innovative development and design.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/skadigitalhub"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/skadigitalhub"><i class="fab fa-github"></i></a>
+                        <a href="https://wa.me/233546712356"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#web">Web Development</a></li>
+                        <li><a href="#mobile">Mobile App Development</a></li>
+                        <li><a href="#design">UI/UX Design</a></li>
+                        <li><a href="#cloud">Cloud Solutions</a></li>
+                        <li><a href="#database">DevOps</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#benefit">About Us</a></li>
+                        <li><a href="#">Our Team</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Suncity, Ablekuman-Oduman</li>
+                        <li><a href="tel:+233546712356"><i class="fas fa-phone"></i> +233 (546) 712-356</a></li>
+                        <li><a href="mailto:dev.skadigitalhub@gmail.com"><i class="fas fa-envelope"></i> dev.skadigitalhub@gmail.com</a></li>
+                    </ul> 
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Ska Digital Hub. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Simple animation for elements when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            // Observe service cards
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+            
+            // Observe project cards
+            document.querySelectorAll('.project-card').forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+            
+            // Observe testimonial cards
+            document.querySelectorAll('.testimonial-card').forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+            
+            // Animate floating background elements
+            const floatingElements = document.querySelectorAll('.floating-element');
+            floatingElements.forEach(el => {
+                const randomX = Math.random() * 20 - 10;
+                const randomY = Math.random() * 20 - 10;
+                el.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            });
+
+            // Modal functionality
+            const calendarModal = document.getElementById('calendarModal');
+            const projectModal = document.getElementById('projectModal');
+            const scheduleBtn = document.getElementById('scheduleConsultationBtn');
+            const startProjectBtn = document.getElementById('startProjectBtn');
+            const closeCalendarModal = document.getElementById('closeCalendarModal');
+            const closeProjectModal = document.getElementById('closeProjectModal');
+
+            function openCalendarModal() {
+                calendarModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function openProjectModal() {
+                projectModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeCalendarModalFunc() {
+                calendarModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+
+            function closeProjectModalFunc() {
+                projectModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+
+            scheduleBtn.addEventListener('click', openCalendarModal);
+            startProjectBtn.addEventListener('click', openProjectModal);
+            closeCalendarModal.addEventListener('click', closeCalendarModalFunc);
+            closeProjectModal.addEventListener('click', closeProjectModalFunc);
+
+            // Close modal when clicking outside the content
+            calendarModal.addEventListener('click', function(event) {
+                if (event.target === calendarModal) {
+                    closeCalendarModalFunc();
+                }
+            });
+
+            projectModal.addEventListener('click', function(event) {
+                if (event.target === projectModal) {
+                    closeProjectModalFunc();
+                }
+            });
+
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    if (calendarModal.style.display === 'flex') {
+                        closeCalendarModalFunc();
+                    }
+                    if (projectModal.style.display === 'flex') {
+                        closeProjectModalFunc();
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
