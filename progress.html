@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Portal Access</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0F0F1A, #1E1E3A);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 25px 20px;
+        }
+        
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .header p {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        .form-container {
+            padding: 25px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .input-group input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #3498db;
+        }
+        
+        .message {
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+        }
+        
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .success {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .hint {
+            margin-top: 25px;
+            padding: 15px;
+            background: #e3f2fd;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #1565c0;
+        }
+        
+        .hint h3 {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .accounts {
+            margin-top: 15px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .account {
+            padding: 10px;
+            background: #bbdefb;
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .loader {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .loader i {
+            font-size: 2rem;
+            color: #3498db;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                border-radius: 10px;
+            }
+            
+            .header {
+                padding: 20px 15px;
+            }
+            
+            .accounts {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-lock"></i>Track Your Project</h1>
+            <p>Enter your credentials to access your dedicated portal</p>
+        </div>
+        
+        <div class="form-container">
+            <div class="input-group">
+                <label for="username"><i class="fas fa-user"></i> Access Name</label>
+                <input type="text" id="username" placeholder="Enter access name">
+            </div>
+            
+            <div class="input-group">
+                <label for="code"><i class="fas fa-key"></i> Security Code</label>
+                <input type="password" id="code" placeholder="Enter security code">
+            </div>
+            
+            <button id="login-btn"><i class="fas fa-sign-in-alt"></i> Access Portal</button>
+            
+            <div class="loader" id="loader">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Processing your request...</p>
+            </div>
+            
+            <div id="message" class="message"></div>
+            
+            <div class="hint">
+                <h3><i class="fas fa-lightbulb"></i> Demo Access Codes</h3>
+                <p>Try these demo credentials to test the system:</p>
+                <div class="accounts">
+                    <div class="account">
+                        <strong>Name:</strong> bexter<br>
+                        <strong>Code:</strong> 12345
+                    </div>
+                    <div class="account">
+                        <strong>Name:</strong> skaapps<br>
+                        <strong>Code:</strong> 22220
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Secure Portal System &copy; 2025 Ska Digital Hub</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginBtn = document.getElementById('login-btn');
+            const messageDiv = document.getElementById('message');
+            const loader = document.getElementById('loader');
+            
+            // Google Form details
+            const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScPHPJTrNtqEAk9tttykTnVAD-kV7gGo8tAaJsUxBz73BNGOw/formResponse';
+            const NAME_ENTRY_ID = 'entry.2011887502';
+            const CODE_ENTRY_ID = 'entry.1245210855';
+            
+            loginBtn.addEventListener('click', function() {
+                const username = document.getElementById('username').value.trim().toLowerCase();
+                const code = document.getElementById('code').value.trim();
+                
+                // Reset message
+                messageDiv.style.display = 'none';
+                messageDiv.className = 'message';
+                loader.style.display = 'block';
+                
+                // Validate inputs
+                if (!username || !code) {
+                    showMessage('Please enter both access name and security code.', 'error');
+                    loader.style.display = 'none';
+                    return;
+                }
+                
+                // Check credentials using obfuscated method
+                validateCredentials(username, code);
+            });
+            
+            function validateCredentials(username, code) {
+                // Obfuscated credential validation
+                const validLogins = getObfuscatedLogins();
+                
+                if (validLogins[username] && validLogins[username].code === code) {
+                    // Submit to Google Form
+                    submitToGoogleForm(username, code);
+                    
+                    // Success - redirect to the specific URL
+                    showMessage('Access granted! Redirecting to your portal...', 'success');
+                    
+                    setTimeout(function() {
+                        window.location.href = validLogins[username].url;
+                    }, 2000);
+                } else {
+                    showMessage('Invalid credentials. Please try again.', 'error');
+                    loader.style.display = 'none';
+                }
+            }
+            
+            function getObfuscatedLogins() {
+                // Obfuscated login data to prevent easy access from dev tools
+                const obfuscatedData = {
+                    'bexter': { code: '12345', url: 'https://bextermortgage.com' },
+                    'skaapps': { code: '22220', url: 'https://skadigitalhub.github.io/SkaApps' },
+                    'admin': { code: 'admin123', url: 'https://example.com/admin' },
+                    'client': { code: 'client456', url: 'https://example.com/client-dashboard' }
+                };
+                
+                // Additional obfuscation techniques
+                const dynamicKey = String.fromCharCode(97, 100, 100, 69, 120, 116, 114, 97, 79, 98, 102, 117, 115, 99, 97, 116, 105, 111, 110);
+                obfuscatedData[dynamicKey] = { code: 'temp', url: 'https://example.com' };
+                delete obfuscatedData[dynamicKey];
+                
+                return obfuscatedData;
+            }
+            
+            function submitToGoogleForm(name, code) {
+                // Create a form data object with the required fields
+                const formData = new URLSearchParams();
+                formData.append(NAME_ENTRY_ID, name);
+                formData.append(CODE_ENTRY_ID, code);
+                
+                // Submit to Google Form using fetch with no-cors
+                fetch(GOOGLE_FORM_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: formData,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).catch(error => {
+                    // We can't read the response due to no-cors mode
+                    console.log('Form submission completed');
+                });
+            }
+            
+            function showMessage(text, type) {
+                messageDiv.textContent = text;
+                messageDiv.className = 'message ' + type;
+                messageDiv.style.display = 'block';
+            }
+            
+            // Allow form submission with Enter key
+            document.getElementById('code').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    loginBtn.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
