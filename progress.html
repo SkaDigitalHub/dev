@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Login Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2980 0%, #26d0ce 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header {
+            background: linear-gradient(to right, #1a2980, #26d0ce);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+        
+        .form-container {
+            padding: 40px;
+        }
+        
+        .form-group {
+            margin-bottom: 28px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 15px;
+            letter-spacing: 0.3px;
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .input-with-icon i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #1a2980;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 18px 18px 18px 55px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: #f8fafc;
+            color: #2d3748;
+        }
+        
+        .form-control:focus {
+            border-color: #1a2980;
+            outline: none;
+            background-color: white;
+            box-shadow: 0 0 0 4px rgba(26, 41, 128, 0.1);
+            transform: translateY(-1px);
+        }
+        
+        .form-control:valid {
+            border-color: #48bb78;
+        }
+        
+        .form-control:invalid:not(:placeholder-shown) {
+            border-color: #f56565;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #718096;
+            transition: color 0.3s;
+            background: none;
+            border: none;
+            font-size: 18px;
+            padding: 5px;
+        }
+        
+        .password-toggle:hover {
+            color: #1a2980;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(to right, #1a2980, #26d0ce);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(26, 41, 128, 0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .btn i {
+            margin-right: 12px;
+            font-size: 20px;
+        }
+        
+        .loading {
+            display: none;
+        }
+        
+        .message {
+            padding: 18px;
+            border-radius: 12px;
+            margin-top: 25px;
+            text-align: center;
+            font-weight: 500;
+            display: none;
+            animation: slideIn 0.3s ease-out;
+            border-left: 4px solid;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .success {
+            background-color: #f0fff4;
+            color: #22543d;
+            border-left-color: #48bb78;
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.1);
+        }
+        
+        .error {
+            background-color: #fff5f5;
+            color: #742a2a;
+            border-left-color: #f56565;
+            box-shadow: 0 4px 12px rgba(245, 101, 101, 0.1);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: #718096;
+            font-size: 14px;
+            border-top: 1px solid #e2e8f0;
+            background: #f8fafc;
+        }
+        
+        .footer i {
+            color: #1a2980;
+            margin: 0 5px;
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+            margin-right: 12px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .input-error {
+            color: #f56565;
+            font-size: 14px;
+            margin-top: 8px;
+            display: none;
+        }
+        
+        .security-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            color: #4a5568;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                border-radius: 16px;
+                max-width: 100%;
+            }
+            
+            .form-container {
+                padding: 30px 25px;
+            }
+            
+            .header {
+                padding: 25px 15px;
+            }
+            
+            .header h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-shield-alt"></i> Secure Login</h1>
+                <p>Access your account with enterprise-grade security</p>
+            </div>
+        </div>
+        
+        <div class="form-container">
+            <form id="loginForm" novalidate>
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user-circle"></i>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            class="form-control" 
+                            placeholder="name@company.com"
+                            required
+                            autocomplete="username"
+                        >
+                    </div>
+                    <div class="input-error" id="emailError">Please enter a valid email address</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password"><i class="fas fa-key"></i> Password</label>
+                    <div class="input-with-icon">
+                        
+                        <input 
+                            type="password" 
+                            id="password" 
+                            class="form-control" 
+                            placeholder="Enter your password"
+                            required
+                            minlength="6"
+                            autocomplete="current-password"
+                        >
+                        <button type="button" class="password-toggle" id="togglePassword" aria-label="Toggle password visibility">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="input-error" id="passwordError">Password must be at least 6 characters</div>
+                </div>
+                
+                <button type="submit" class="btn" id="submitBtn">
+                    <span class="btn-text">
+                        <i class="fas fa-sign-in-alt"></i> Sign In
+                    </span>
+                    <div class="loading" id="loadingSpinner">
+                        <div class="spinner"></div> Authenticating...
+                    </div>
+                </button>
+            </form>
+            
+            <div class="message" id="messageBox"></div>
+            
+            <div class="security-info">
+                <i class="fas fa-lock"></i>
+                <span>Encrypted connection • Powered by Google Apps Script</span>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><i class="fas fa-server"></i> Backend API v1.0 • <i class="fas fa-clock"></i> Last updated: Today</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const loginForm = document.getElementById('loginForm');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const togglePassword = document.getElementById('togglePassword');
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.querySelector('.btn-text');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const messageBox = document.getElementById('messageBox');
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+            
+            // Backend URL - IMPORTANT: You must deploy your Google Apps Script with CORS enabled
+            const backendUrl = 'https://script.google.com/macros/s/AKfycbwMRKtmJCfUhuMwUpWWYIDvLjEsE5WuIE3CkLhKg0krY4K0977AqyFG1ydCCtP0K8Tg/exec';
+            
+            // Real-time validation
+            emailInput.addEventListener('input', validateEmail);
+            passwordInput.addEventListener('input', validatePassword);
+            
+            function validateEmail() {
+                const email = emailInput.value.trim();
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                
+                if (!email) {
+                    emailError.style.display = 'none';
+                    return false;
+                }
+                
+                if (!emailRegex.test(email)) {
+                    emailError.style.display = 'block';
+                    return false;
+                }
+                
+                emailError.style.display = 'none';
+                return true;
+            }
+            
+            function validatePassword() {
+                const password = passwordInput.value;
+                
+                if (!password) {
+                    passwordError.style.display = 'none';
+                    return false;
+                }
+                
+                if (password.length < 6) {
+                    passwordError.style.display = 'block';
+                    return false;
+                }
+                
+                passwordError.style.display = 'none';
+                return true;
+            }
+            
+            // Toggle password visibility
+            togglePassword.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                
+                const eyeIcon = this.querySelector('i');
+                eyeIcon.classList.toggle('fa-eye');
+                eyeIcon.classList.toggle('fa-eye-slash');
+                
+                // Update aria-label for accessibility
+                this.setAttribute('aria-label', 
+                    type === 'password' ? 'Show password' : 'Hide password'
+                );
+            });
+            
+            // Form submission handler
+            loginForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Validate inputs
+                const isEmailValid = validateEmail();
+                const isPasswordValid = validatePassword();
+                
+                if (!isEmailValid || !isPasswordValid) {
+                    showMessage('Please correct the errors in the form.', 'error');
+                    return;
+                }
+                
+                // Get form values
+                const email = emailInput.value.trim();
+                const password = passwordInput.value;
+                
+                // Show loading state
+                setLoadingState(true);
+                
+                try {
+                    // Create URLSearchParams for form data
+                    const params = new URLSearchParams();
+                    params.append('email', email);
+                    params.append('password', password);
+                    
+                    // IMPORTANT: For Google Apps Script Web Apps, use mode: 'no-cors' 
+                    // but we need to handle the redirect differently
+                    
+                    // Send POST request to backend
+                    const response = await fetch(backendUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: params,
+                        // Note: Google Apps Script Web Apps don't support CORS for POST requests
+                        // We need to use a workaround
+                    });
+                    
+                    // Check if response is ok
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    // Parse the JSON response
+                    const data = await response.json();
+                    
+                    // Handle response from backend
+                    if (data.error) {
+                        // Authentication failed
+                        showMessage(data.error, 'error');
+                        setLoadingState(false);
+                        
+                        // Clear password field for security
+                        passwordInput.value = '';
+                        passwordInput.focus();
+                    } else if (data.url) {
+                        // Authentication successful - redirect to the URL from backend
+                        showMessage('Authentication successful! Redirecting...', 'success');
+                        
+                        // Store authentication token in localStorage if provided
+                        if (data.token) {
+                            localStorage.setItem('auth_token', data.token);
+                        }
+                        
+                        // Store user session data if provided
+                        if (data.user) {
+                            sessionStorage.setItem('user_data', JSON.stringify(data.user));
+                        }
+                        
+                        // Redirect after a short delay to show success message
+                        setTimeout(() => {
+                            window.location.href = data.url;
+                        }, 1500);
+                    } else {
+                        // Unexpected response
+                        showMessage('Unexpected response from server. Please try again.', 'error');
+                        setLoadingState(false);
+                    }
+                    
+                } catch (error) {
+                    console.error('Authentication error:', error);
+                    
+                    // Fallback method for Google Apps Script (since CORS is often an issue)
+                    showMessage('Using alternative authentication method...', 'success');
+                    
+                    // Create a hidden form and submit it (works with Google Apps Script)
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = backendUrl;
+                    form.style.display = 'none';
+                    
+                    const emailField = document.createElement('input');
+                    emailField.type = 'hidden';
+                    emailField.name = 'email';
+                    emailField.value = email;
+                    
+                    const passwordField = document.createElement('input');
+                    passwordField.type = 'hidden';
+                    passwordField.name = 'password';
+                    passwordField.value = password;
+                    
+                    form.appendChild(emailField);
+                    form.appendChild(passwordField);
+                    document.body.appendChild(form);
+                    
+                    // The form submission will trigger a redirect from the backend
+                    // Note: This requires your backend to return HTML with a redirect
+                    form.submit();
+                    
+                    // Show a message while redirecting
+                    setTimeout(() => {
+                        showMessage('If you are not redirected automatically, please check your credentials.', 'error');
+                        setLoadingState(false);
+                    }, 3000);
+                }
+            });
+            
+            // Function to show message
+            function showMessage(message, type) {
+                messageBox.textContent = message;
+                messageBox.className = `message ${type}`;
+                messageBox.style.display = 'block';
+                
+                // Auto-hide success messages after redirect
+                if (type === 'success') {
+                    setTimeout(() => {
+                        messageBox.style.display = 'none';
+                    }, 3000);
+                }
+                
+                // Auto-hide error messages after 5 seconds
+                if (type === 'error') {
+                    setTimeout(() => {
+                        messageBox.style.display = 'none';
+                    }, 5000);
+                }
+            }
+            
+            // Function to set loading state
+            function setLoadingState(isLoading) {
+                if (isLoading) {
+                    btnText.style.display = 'none';
+                    loadingSpinner.style.display = 'flex';
+                    submitBtn.disabled = true;
+                    emailInput.disabled = true;
+                    passwordInput.disabled = true;
+                } else {
+                    btnText.style.display = 'flex';
+                    loadingSpinner.style.display = 'none';
+                    submitBtn.disabled = false;
+                    emailInput.disabled = false;
+                    passwordInput.disabled = false;
+                }
+            }
+            
+            // Auto-focus email input
+            emailInput.focus();
+            
+            // Add keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                // Ctrl+Enter to submit form
+                if (e.ctrlKey && e.key === 'Enter') {
+                    loginForm.requestSubmit();
+                }
+                
+                // Escape to clear form
+                if (e.key === 'Escape') {
+                    loginForm.reset();
+                    emailError.style.display = 'none';
+                    passwordError.style.display = 'none';
+                    messageBox.style.display = 'none';
+                }
+            });
+            
+            // Session timeout warning (optional)
+            let inactivityTimer;
+            function resetInactivityTimer() {
+                clearTimeout(inactivityTimer);
+                inactivityTimer = setTimeout(() => {
+                    if (document.hasFocus()) {
+                        showMessage('Session will expire due to inactivity soon.', 'error');
+                    }
+                }, 5 * 60 * 1000); // 5 minutes
+            }
+            
+            // Reset timer on user activity
+            ['mousemove', 'keypress', 'click', 'scroll'].forEach(event => {
+                document.addEventListener(event, resetInactivityTimer);
+            });
+            
+            resetInactivityTimer();
+        });
+    </script>
+</body>
+</html>
