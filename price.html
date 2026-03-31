@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Ska Digital Hub | Premium Price List</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #3b82f6;
+      --gold: #fbbf24;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      --card-bg: rgba(255, 255, 255, 0.9);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 3rem 1.5rem;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    /* Premium Header */
+    .page-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .page-header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    .page-header h1 span {
+      font-weight: 300;
+      color: var(--accent);
+      background: linear-gradient(to right, #3b82f6, #2dd4bf);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .header-line {
+      width: 60px;
+      height: 4px;
+      background: var(--accent);
+      margin: 0 auto;
+      border-radius: 2px;
+    }
+
+    /* Pricing Grid */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    /* Plan Card Refined */
+    .plan-card {
+      background: var(--card-bg);
+      border-radius: 2rem;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      backdrop-filter: blur(10px);
+    }
+
+    /* Highlight the Professional Package */
+    .plan-card:first-child {
+      border: 2px solid var(--accent);
+      transform: scale(1.03);
+      box-shadow: 0 20px 40px -15px rgba(59, 130, 246, 0.2);
+    }
+    .plan-card:first-child::before {
+      content: "MOST POPULAR";
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: white;
+      padding: 4px 15px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .plan-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+      border-color: var(--accent);
+    }
+
+    .card-header {
+      padding: 2rem 2rem 1rem 2rem;
+    }
+    .plan-name {
+      font-size: 0.9rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .plan-name i {
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+    .price {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+    .price small {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .best-for {
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(59, 130, 246, 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      display: inline-block;
+    }
+
+    .features-list {
+      padding: 1.5rem 2rem;
+      flex: 1;
+    }
+    .features-list ul {
+      list-style: none;
+    }
+    .features-list li {
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+    .features-list li i {
+      color: #10b981;
+      font-size: 0.9rem;
+    }
+
+    .limitation-note {
+      background: #fffbeb;
+      border-left: 3px solid var(--gold);
+      padding: 0.8rem;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      margin-top: 1.5rem;
+      color: #92400e;
+      font-weight: 500;
+    }
+
+    .card-footer {
+      padding: 1.5rem 2rem 2rem 2rem;
+    }
+    .cta-icons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+    }
+    .icon-btn {
+      aspect-ratio: 1/1;
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: var(--text-main);
+    }
+    .icon-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: scale(1.1);
+    }
+    .whatsapp-btn:hover { background: #25D366 !important; border-color: #25D366 !important; }
+
+    /* Comparison Section */
+    .comparison-section {
+      background: white;
+      border-radius: 2rem;
+      padding: 2.5rem;
+      margin-top: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    }
+    .comparison-section h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+    }
+    .comp-table-wrapper {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 1.2rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    th {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+    }
+    .version-name { font-weight: 700; color: var(--primary); }
+    .price-cell { font-weight: 800; color: var(--accent); }
+
+    footer {
+      margin-top: 5rem;
+      text-align: center;
+      color: var(--text-muted);
+      border-top: 1px solid #e2e8f0;
+      padding-top: 3rem;
+    }
+    .footer-contact {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .footer-contact span {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .footer-contact i { color: var(--accent); margin-right: 0.5rem; }
+
+    @media (max-width: 768px) {
+      .plan-card:first-child { transform: scale(1); margin-top: 1rem; }
+      .page-header h1 { font-size: 1.8rem; }
+      .pricing-grid { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="page-header">
+    <h1>Ska Digital Hub <span>Price List</span></h1>
+    <div class="header-line"></div>
+  </div>
+
+  <div class="pricing-grid" id="plansContainer"></div>
+
+  <div class="comparison-section">
+    <h3><i class="fas fa-layer-group"></i> Performance Comparison</h3>
+    <div class="comp-table-wrapper">
+      <table id="comparisonTable">
+        <thead>
+          <tr><th>Version</th><th>Investment (GHS)</th><th>Strategic Strength</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-contact">
+      <span><i class="fas fa-map-marker-alt"></i> Suncity, Ablekuman</span>
+      <span><i class="fas fa-phone-alt"></i> +233 05 467 123 56</span>
+      <span><i class="fas fa-envelope"></i> dev.skadigitalhub@gmail.com</span>
+      <span><i class="fas fa-globe"></i> skadigitalhub.github.io/dev</span>
+    </div>
+    <p>© <span id="currentYear"></span> Ska Digital Hub — Bespoke Digital Engineering. All prices in GHS.</p>
+  </footer>
+</div>
+
+<script>
+  // Plan data (Unchanged)
+  const plans = [
+    {
+      name: "FULL PROFESSIONAL PACKAGE",
+      icon: "fas fa-crown",
+      price: "12,220",
+      best: "Established full business system · Scale · Full automation",
+      features: [
+        "Custom UI/UX design",
+        "Full frontend + backend system",
+        "Database (stores orders & users)",
+        "Admin dashboard (manage orders)",
+        "Mobile money payment integration",
+        "Email notifications",
+        "Secure hosting + domain",
+        "Testing + deployment",
+        "Maintenance included (1 month)"
+      ],
+      limitations: "Automation & full control — complete business ecosystem",
+      strength: "Complete system + automation, admin dashboard, payments"
+    },
+    {
+      name: "LOW-BUDGET",
+      icon: "fas fa-seedling",
+      price: "3,720",
+      best: "Small startups · Growing businesses",
+      features: [
+        "Clean landing page",
+        "Simple order form",
+        "Orders sent via email",
+        "Basic database",
+        "WhatsApp integration",
+        "Mobile-friendly design",
+        "Hosting + domain included"
+      ],
+      limitations: "⚠️ No admin dashboard · No payment system",
+      strength: "Balanced features, hosting + domain, WhatsApp integration"
+    },
+    {
+      name: "STUDENT",
+      icon: "fas fa-graduation-cap",
+      price: "1,620",
+      best: "Students / side gigs · Testing business idea",
+      features: [
+        "Basic website (landing page)",
+        "Simple order/contact form",
+        "WhatsApp button",
+        "Email notifications",
+        "Mobile-friendly"
+      ],
+      limitations: "No database · No automation · Manual order handling",
+      strength: "Basic functionality, email notifications, mobile-ready"
+    },
+    {
+      name: "WHATSAPP-ONLY",
+      icon: "fab fa-whatsapp",
+      price: "1,300",
+      best: "Very small businesses · WhatsApp-driven sales",
+      features: [
+        "One-page website",
+        "WhatsApp click-to-chat button",
+        "Pre-filled order message",
+        "Mobile-first design",
+        "Fast loading"
+      ],
+      limitations: "No forms · No database · No payments",
+      strength: "Simple sales funnel, click-to-chat, pre-filled message"
+    },
+    {
+      name: "MINIMUM (ULTRA LOW)",
+      icon: "fas fa-coins",
+      price: "1,000",
+      best: "Absolute beginners · Tight budgets · Quick online presence",
+      features: [
+        "Simple one-page site",
+        "Free hosting + subdomain",
+        "WhatsApp order button",
+        "Pre-filled message",
+        "Mobile-friendly"
+      ],
+      limitations: "No custom domain · No backend · Very basic design",
+      strength: "Cheapest online presence, subdomain + WhatsApp order"
+    }
+  ];
+
+  // Logic Functions (Unchanged)
+  function buildPackageMessage(plan) {
+    const featureBullets = plan.features.map(f => `✓ ${f}`).join("\n");
+    let limitsText = "";
+    if (plan.limitations) {
+      limitsText = `\n⚠️ LIMITATIONS:\n${plan.limitations}`;
+    }
+    const message = `🏷️ *${plan.name} VERSION* — Ska Digital Hub\n💰 *Price:* GHS ${plan.price}\n🎯 *Best for:* ${plan.best}\n\n✨ *FEATURES:*\n${featureBullets}${limitsText}\n\n📞 Contact Ska Digital Hub:\n📧 dev.skadigitalhub@gmail.com\n📱 +233 05 467 123 56\n📍 Suncity, Ablekuman\n🌐 skadigitalhub.github.io/dev`;
+    return message;
+  }
+
+  function handleEmail(plan) {
+    const subject = encodeURIComponent(`Inquiry: ${plan.name} - GHS ${plan.price}`);
+    const body = encodeURIComponent(buildPackageMessage(plan));
+    window.location.href = `mailto:dev.skadigitalhub@gmail.com?subject=${subject}&body=${body}`;
+  }
+
+  function handleWhatsApp(plan) {
+    const phone = "2330546712356";
+    const text = encodeURIComponent(buildPackageMessage(plan));
+    window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+  }
+
+  function handleSMS(plan) {
+    const phone = "2330546712356";
+    const smsText = encodeURIComponent(`Ska Digital Hub: ${plan.name} - GHS ${plan.price}. Features: ${plan.features.slice(0,2).join(', ')}... Full details: ${buildPackageMessage(plan).substring(0, 140)}`);
+    window.location.href = `sms:${phone}?body=${smsText}`;
+  }
+
+  function handleCall() {
+    window.location.href = "tel:+2330546712356";
+  }
+
+  function renderCards() {
+    const grid = document.getElementById('plansContainer');
+    if (!grid) return;
+    grid.innerHTML = '';
+    plans.forEach((plan, idx) => {
+      const card = document.createElement('div');
+      card.className = 'plan-card';
+      
+      let featuresHtml = '';
+      plan.features.forEach(feat => {
+        featuresHtml += `<li><i class="fas fa-check-circle"></i> ${feat}</li>`;
+      });
+      
+      let limitationHtml = '';
+      if (plan.limitations) {
+        limitationHtml = `<div class="limitation-note"><i class="fas fa-shield-halved"></i> ${plan.limitations}</div>`;
+      }
+      
+      card.innerHTML = `
+        <div class="card-header">
+          <div class="plan-name">
+            ${plan.name} <i class="${plan.icon}"></i>
+          </div>
+          <div class="price">GHS ${plan.price} <small>investment</small></div>
+          <div class="best-for">${plan.best}</div>
+        </div>
+        <div class="features-list">
+          <ul>${featuresHtml}</ul>
+          ${limitationHtml}
+        </div>
+        <div class="card-footer">
+          <div class="cta-icons">
+            <button class="icon-btn email-btn" data-plan-index="${idx}" title="Email"><i class="fas fa-envelope"></i></button>
+            <button class="icon-btn whatsapp-btn" data-plan-index="${idx}" title="WhatsApp"><i class="fab fa-whatsapp"></i></button>
+            <button class="icon-btn sms-btn" data-plan-index="${idx}" title="SMS"><i class="fas fa-comment-dots"></i></button>
+            <button class="icon-btn call-btn" title="Call"><i class="fas fa-phone-alt"></i></button>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+    
+    document.querySelectorAll('.email-btn').forEach(btn => {
+      btn.addEventListener('click', () => handleEmail(plans[parseInt(btn.getAttribute('data-plan-index'))]));
+    });
+    document.querySelectorAll('.whatsapp-btn').forEach(btn => {
+      btn.addEventListener('click', () => handleWhatsApp(plans[parseInt(btn.getAttribute('data-plan-index'))]));
+    });
+    document.querySelectorAll('.sms-btn').forEach(btn => {
+      btn.addEventListener('click', () => handleSMS(plans[parseInt(btn.getAttribute('data-plan-index'))]));
+    });
+    document.querySelectorAll('.call-btn').forEach(btn => {
+      btn.addEventListener('click', () => handleCall());
+    });
+  }
+  
+  function renderComparison() {
+    const tbody = document.querySelector('#comparisonTable tbody');
+    if (!tbody) return;
+    tbody.innerHTML = '';
+    const versionMap = {
+      "FULL PROFESSIONAL": "🏆 Full Professional",
+      "LOW-BUDGET": "💼 Low Budget",
+      "STUDENT": "🎓 Student",
+      "WHATSAPP-ONLY": "💬 WhatsApp-Only",
+      "MINIMUM (ULTRA LOW)": "🌱 Minimum"
+    };
+    plans.forEach(plan => {
+      const row = tbody.insertRow();
+      row.innerHTML = `
+        <td class="version-name">${versionMap[plan.name.split(' (')[0]] || plan.name}</td>
+        <td class="price-cell">GHS ${plan.price}</td>
+        <td class="key-strength">${plan.strength}</td>
+      `;
+    });
+  }
+  
+  function setFooterDate() {
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+  }
+  
+  renderCards();
+  renderComparison();
+  setFooterDate();
+</script>
+</body>
+</html>
